@@ -11,6 +11,7 @@ class HotMovieItemWidget extends StatefulWidget {
     return HotMovieItemWidgetState();
   }
 }
+
 class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.network(
-            widget.hotMovieData.images,
+            widget.hotMovieData.images.small,
             width: 80,
             height: 120,
             fit: BoxFit.cover,
@@ -40,12 +41,12 @@ class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    widget.hotMovieData.rating.toString(),
+                    widget.hotMovieData.rating.average.toString(),
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
-                  Text('导演: ' + widget.hotMovieData.directors,
+                  Text('导演: ' + widget.hotMovieData.getDirectors(),
                       style: TextStyle(fontSize: 14, color: Colors.black54)),
-                  Text('主演: ' + widget.hotMovieData.casts,
+                  Text('主演: ' + widget.hotMovieData.getCasts(),
                       style: TextStyle(fontSize: 14, color: Colors.black54)),
                 ],
               ),
@@ -56,15 +57,19 @@ class HotMovieItemWidgetState extends State<HotMovieItemWidget> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(widget.hotMovieData.watchedPeople.toString()+'人看过',style: TextStyle(color: Colors.red,fontSize: 14),),
+                Text(
+                  widget.hotMovieData.collectCount.toString() + '人看过',
+                  style: TextStyle(color: Colors.red, fontSize: 14),
+                ),
                 OutlineButton(
-                  child: Text('购票',style: TextStyle(fontSize: 16),),
+                  child: Text(
+                    '购票',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   color: Colors.red,
                   textColor: Colors.red,
                   highlightedBorderColor: Colors.red,
-                  borderSide: BorderSide(
-                    color: Colors.red
-                  ),
+                  borderSide: BorderSide(color: Colors.red),
                   onPressed: () {},
                 )
               ],
